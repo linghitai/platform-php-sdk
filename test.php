@@ -17,7 +17,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 
-use DataCenter\PlatformPhpSdk\HandClient;
+use LinghitAi\PlatformPhpSdk\HandClient;
 
 
 
