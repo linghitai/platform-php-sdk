@@ -17,7 +17,7 @@ use LinghitAi\PlatformPhpSdk\HandClient;
 //$ak,$sk 在AI平台控制台进行申请
 $client = new HandClient($ak, $sk);
 
-//使用图片的$bas64编码进行调用
+//使用图片的$base64编码进行调用,如果使用表单或者其他方式上传图片的，需要获取图片的base64
 $bas64 = "data:image\jpg;base64......"；
 
 $res = $client->handRecognitionByBase64($bas64);
