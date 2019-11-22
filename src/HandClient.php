@@ -17,7 +17,6 @@ use LinghitAi\PlatformPhpSdk\Lib\Config;
 use LinghitAi\PlatformPhpSdk\Lib\GlobalIds;
 
 
-
 class HandClient extends ApiBase
 {
     public function handRecognitionByBase64($imgBase64)

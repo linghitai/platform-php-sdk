@@ -16,8 +16,10 @@
         "phpunit/phpunit": "^5.0"
     },
     "autoload": {
+        "files":["test.php"],
         "psr-4": {
             "LinghitAi\\PlatformPhpSdk\\": "src"
         }
     }
+
 }
