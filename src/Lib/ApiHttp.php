@@ -55,10 +55,9 @@ class ApiHttp
             throw new \Exception(curl_error($ch));
         }
         curl_close($ch);
-        return array(
-            'code' => $code,
-            'content' => $content,
-        );
+
+        return $content;
+
     }
 
     public static function getHdate(){
