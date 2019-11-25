@@ -29,7 +29,6 @@ abstract class ApiBase {
      */
     protected $sk = '';
 
-
     /**
      * @param string $ak
      * @param string $sk
