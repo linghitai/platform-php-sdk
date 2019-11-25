@@ -9,7 +9,8 @@
     ],
     "minimum-stability":"dev",
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "linghitai/platform-php-sdk": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.0"

@@ -22,20 +22,25 @@ class ApiHttp
      * @return array
      */
     public function post($url, $data,$ak,$secret){
-       // $url = $this->buildUrl($url, $params);
 
         $hdate = $this->getHdate();
+
         $signature = KongHmac::getSignature($hdate,$secret);
 
-        $headers=array(
-            "Content-Type: application/json; charset=utf-8",
-            "x-date: " . $hdate,
-            "Authorization: " . "hmac username=".$ak."," .
-            " algorithm=hmac-sha1, headers=x-date, " .
-            "signature=".$signature.")"
-        );
+//        $headers=array(
+//            "Content-Type: application/json; charset=utf-8",
+//            "x-date: " . $hdate,
+//            "Authorization: " . "hmac username=".$ak."," .
+//            " algorithm=hmac-sha1, headers=x-date, " .
+//            "signature=".$signature
+//        );
+        $headers[] = "Content-Type: application/json; charset=utf-8";
+        $headers[] = 'x-date: '. $hdate;
+        $headers[] = 'Authorization: '. 'hmac username="'.$ak.'",' .
+            ' algorithm="hmac-sha1", headers="x-date", ' .
+            'signature="'.$signature.'"';
 
-        //var_dump( $headers);
+//        var_dump( $headers);
 
        // $headers = array_merge($this->headers, $this->buildHeaders($headers));
         $ch = curl_init();
@@ -49,11 +54,17 @@ class ApiHttp
         curl_setopt($ch, CURLOPT_POSTFIELDS,  json_encode($data));
         curl_setopt($ch, CURLOPT_TIMEOUT_MS, 60000);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, 60000);
+        curl_setopt($ch,CURLINFO_HEADER_OUT,true);
+
         $content = curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+      // echo curl_getinfo($ch,CURLINFO_HEADER_OUT);
+       // var_dump( curl_getinfo($ch, CURLINFO_HEADER_OUT)); //官方文档描述是“发送请求的字符串”，其实就是请求的header。这个就是直接查看请求header，因为上面允许查看
         if($code === 0){
             throw new \Exception(curl_error($ch));
         }
+
         curl_close($ch);
 
         return $content;

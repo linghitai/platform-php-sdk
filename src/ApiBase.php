@@ -46,10 +46,13 @@ abstract class ApiBase {
         $sk = $params->getSk();
 
         $http = new ApiHttp();
-       // var_dump($params->getUrl());
         $res = $http->post($url,$params->getJson(),$ak,$sk);
-        //var_dump($res);
-        return json_encode($res);
+
+        $obj = json_decode($res,TRUE);
+
+        $json = json_encode($obj);
+
+        return $json;
     }
 
 
