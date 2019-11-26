@@ -19,12 +19,12 @@ use LinghitAi\PlatformPhpSdk\Lib\GlobalIds;
 
 class HandClient extends ApiBase
 {
-    public function handRecognitionByBase64($imgBase64,$timeout = 60)
+    public function handRecognitionByBase64($imgBase64)
     {
         $RequestParametersModel = new RequestParametersModel();
         $RequestParametersModel->setAk($this->ak);
         $RequestParametersModel->setsk($this->sk);
-        $RequestParametersModel->setTimeout($timeout);
+        $RequestParametersModel->setTimeout($this->timeout);
 
         //定义一个正则表达式的筛选规则，为了获取图片的类型,'/^data:image\/(\w+);base64/'
          $rgex = "/^data:image\/(\w+);base64/";
@@ -60,12 +60,12 @@ class HandClient extends ApiBase
         return '';
     }
 
-    public function handRecognitionByUrl($url,$timeout = 60)
+    public function handRecognitionByUrl($url)
     {
         $RequestParametersModel = new RequestParametersModel();
         $RequestParametersModel->setAk($this->ak);
         $RequestParametersModel->setsk($this->sk);
-        $RequestParametersModel->setTimeout($timeout);
+        $RequestParametersModel->setTimeout($this->timeout);
 
         if ($url == ''){
             RetResult::retJson(1000503,'图片地址不能为空');

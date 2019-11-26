@@ -33,9 +33,10 @@ abstract class ApiBase {
      * @param string $ak
      * @param string $sk
      */
-    public function __construct($ak, $sk){
+    public function __construct($ak, $sk,$timeout){
         $this->ak = trim($ak);
         $this->sk = trim($sk);
+        $this->timeout = $timeout;
 
     }
 
