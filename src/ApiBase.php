@@ -43,9 +43,11 @@ abstract class ApiBase {
         $url = $params->getUrl();
         $ak = $params->getAk();
         $sk = $params->getSk();
+        $timeout = $params->getTimeout();
 
         $http = new ApiHttp();
-        $res = $http->post($url,$params->getJson(),$ak,$sk);
+        //var_dump($params);
+        $res = $http->post($url,$params->getJson(),$ak,$sk,$timeout);
 
         $obj = json_decode($res,TRUE);
 

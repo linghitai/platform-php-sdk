@@ -26,6 +26,11 @@ class RequestParametersModel{
     /**
      * @var null|string
      */
+    protected $timeout = 60;
+
+    /**
+     * @var null|string
+     */
     protected $json = array();
 
     /**
@@ -91,6 +96,24 @@ class RequestParametersModel{
     {
         $this->json = $json;
     }
+
+    /**
+     * @return null|string
+     */
+    public function getTimeout()
+    {
+        return $this->timeout;
+    }
+
+    /**
+     * @param null|string $timeout
+     */
+    public function setTimeout($timeout)
+    {
+        $this->timeout = $timeout;
+    }
+
+
 
 
 

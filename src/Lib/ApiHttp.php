@@ -13,7 +13,6 @@ namespace LinghitAi\PlatformPhpSdk\Lib;
 class ApiHttp
 {
 
-
     /**
      * @param  string $url
      * @param  array $data HTTP POST BODY
@@ -21,7 +20,7 @@ class ApiHttp
      * @param  array $headers HTTP header
      * @return array
      */
-    public function post($url, $data,$ak,$secret){
+    public function post($url, $data,$ak,$secret,$timeout = 60){
 
         $hdate = $this->getHdate();
 
@@ -40,11 +39,8 @@ class ApiHttp
             ' algorithm="hmac-sha1", headers="x-date", ' .
             'signature="'.$signature.'"';
 
-//        var_dump( $headers);
-
-       // $headers = array_merge($this->headers, $this->buildHeaders($headers));
         $ch = curl_init();
-       // $this->prepare($ch);
+
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -52,14 +48,13 @@ class ApiHttp
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS,  json_encode($data));
-        curl_setopt($ch, CURLOPT_TIMEOUT_MS, 60000);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, 60000);
+        curl_setopt($ch, CURLOPT_TIMEOUT_MS, $timeout*1000);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, $timeout*1000);
         curl_setopt($ch,CURLINFO_HEADER_OUT,true);
 
         $content = curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-      // echo curl_getinfo($ch,CURLINFO_HEADER_OUT);
        // var_dump( curl_getinfo($ch, CURLINFO_HEADER_OUT)); //官方文档描述是“发送请求的字符串”，其实就是请求的header。这个就是直接查看请求header，因为上面允许查看
         if($code === 0){
             throw new \Exception(curl_error($ch));
