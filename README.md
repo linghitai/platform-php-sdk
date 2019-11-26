@@ -25,7 +25,6 @@ $bas64 = "data:image\jpg;base64......"；
 $res = $client->handRecognitionByBase64($bas64);
 
 //2.使用图片地址上传
-//$timeout默认60s可不传，单位为秒
 $url = "https://....";
 $res = $client->handRecognitionByUrl($url);
 
